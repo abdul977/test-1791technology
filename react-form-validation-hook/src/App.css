@@ -26,6 +26,13 @@
   opacity: 0.9;
 }
 
+.app-header .auth-note {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
 /* Navigation */
 .demo-nav {
   display: flex;
