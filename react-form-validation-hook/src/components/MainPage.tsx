@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import './MainPage.css';
 
 const MainPage: React.FC = () => {
   const { user, logout } = useAuth();
+  const [message, setMessage] = useState('');
+  const [messageError, setMessageError] = useState('');
+
+  const handleWhatsAppSend = () => {
+    // Validate message
+    if (!message.trim()) {
+      setMessageError('Please enter a message before sending.');
+      return;
+    }
+
+    setMessageError('');
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(message.trim());
+
+    // Construct WhatsApp URL
+    const whatsappUrl = `https://wa.me/2349025794407?text=${encodedMessage}`;
+
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
+
+    // Clear the message after sending
+    setMessage('');
+  };
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
+    if (messageError) {
+      setMessageError('');
+    }
+  };
 
   return (
     <div className="main-page">
@@ -33,10 +64,29 @@ const MainPage: React.FC = () => {
               />
             </div>
             <div className="profile-info">
-              <h2>Vibe Coder</h2>
+              <div className="company-brand">Developed by Muahib Solutions</div>
+              <h2>Abdulmumin Ibrahim</h2>
               <p className="title">Full-Stack Developer</p>
               <p className="experience">1-2 Years Experience</p>
               
+              <div className="contact-info">
+                <h3>Contact Information</h3>
+                <div className="contact-details">
+                  <div className="contact-item">
+                    <span className="contact-label">Phone:</span>
+                    <a href="tel:+2349025794407" className="contact-link phone">
+                      090 257 94 407
+                    </a>
+                  </div>
+                  <div className="contact-item">
+                    <span className="contact-label">Email:</span>
+                    <a href="mailto:Abdulmuminibrahim74@gmail.com" className="contact-link email">
+                      Abdulmuminibrahim74@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+
               <div className="skills">
                 <h3>Technical Skills</h3>
                 <div className="skill-tags">
@@ -186,6 +236,49 @@ const MainPage: React.FC = () => {
                 <li><strong>Mobile Responsive:</strong> Seamless experience across all device sizes</li>
                 <li><strong>Production Ready:</strong> Deployed with CI/CD pipeline and monitoring</li>
               </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* WhatsApp Contact Section */}
+        <section className="whatsapp-contact">
+          <div className="contact-container">
+            <h2>Contact Me</h2>
+            <p className="contact-description">
+              Have a project in mind or want to discuss opportunities?
+              Send me a message via WhatsApp and I'll get back to you promptly!
+            </p>
+
+            <div className="whatsapp-form">
+              <div className="form-group">
+                <label htmlFor="whatsapp-message" className="form-label">
+                  Your Message
+                </label>
+                <textarea
+                  id="whatsapp-message"
+                  className={`message-textarea ${messageError ? 'error' : ''}`}
+                  placeholder="Type your message here... (e.g., Hi Abdulmumin, I'd like to discuss a project opportunity with you.)"
+                  value={message}
+                  onChange={handleMessageChange}
+                  rows={4}
+                />
+                {messageError && (
+                  <div className="error-message">{messageError}</div>
+                )}
+              </div>
+
+              <button
+                className="whatsapp-button"
+                onClick={handleWhatsAppSend}
+                type="button"
+              >
+                <span className="whatsapp-icon">📱</span>
+                Send Message via WhatsApp
+              </button>
+
+              <p className="whatsapp-note">
+                Clicking the button will open WhatsApp with your pre-filled message
+              </p>
             </div>
           </div>
         </section>
