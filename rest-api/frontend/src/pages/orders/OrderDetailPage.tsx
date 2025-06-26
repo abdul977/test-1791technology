@@ -84,8 +84,7 @@ const OrderDetailPage: React.FC = () => {
   };
 
   const canCancelOrder = order &&
-    (order.status === OrderStatus.PENDING || order.status === OrderStatus.CONFIRMED) &&
-    order.status !== OrderStatus.CANCELLED;
+    (order.status === OrderStatus.PENDING || order.status === OrderStatus.CONFIRMED);
 
   if (loading) {
     return (

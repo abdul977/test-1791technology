@@ -49,8 +49,8 @@ class ApiClient {
       async (error: AxiosError) => {
         const originalRequest = error.config;
         
-        if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
-          originalRequest._retry = true;
+        if (error.response?.status === 401 && originalRequest && !(originalRequest as any)._retry) {
+          (originalRequest as any)._retry = true;
           
           try {
             const refreshToken = localStorage.getItem('refreshToken');
@@ -79,9 +79,9 @@ class ApiClient {
   private handleError(error: AxiosError): ApiError {
     if (error.response) {
       return {
-        message: error.response.data?.message || 'An error occurred',
+        message: (error.response.data as any)?.message || 'An error occurred',
         status: error.response.status,
-        errors: error.response.data?.errors,
+        errors: (error.response.data as any)?.errors,
       };
     } else if (error.request) {
       return {

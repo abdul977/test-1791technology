@@ -203,7 +203,7 @@ const CartPage: React.FC = () => {
                 className="w-full"
                 size="lg"
               >
-                {isAuthenticated ? 'Proceed to Checkout' : 'Sign in to Checkout'}
+                {'Proceed to Checkout'}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
 
