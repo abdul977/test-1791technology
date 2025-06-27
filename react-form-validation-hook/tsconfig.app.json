@@ -1,27 +1,47 @@
 {
+  // TypeScript configuration for application source code
   "compilerOptions": {
+    // Build info file location for incremental compilation
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    // Target ES2022 for modern JavaScript features
     "target": "ES2022",
+    // Use standard class field behavior
     "useDefineForClassFields": true,
+    // Include ES2022, DOM, and DOM.Iterable type libraries
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    // Use ESNext module system for latest features
     "module": "ESNext",
+    // Skip type checking of declaration files for faster compilation
     "skipLibCheck": true,
 
-    /* Bundler mode */
+    /* Bundler mode - optimized for Vite bundler */
+    // Use bundler-specific module resolution
     "moduleResolution": "bundler",
+    // Allow importing TypeScript files with extensions
     "allowImportingTsExtensions": true,
+    // Don't require exact module syntax
     "verbatimModuleSyntax": false,
+    // Force module detection for all files
     "moduleDetection": "force",
+    // Don't emit JavaScript files (handled by Vite)
     "noEmit": true,
+    // Use React 17+ JSX transform
     "jsx": "react-jsx",
 
-    /* Linting */
+    /* Linting - strict type checking options */
+    // Enable all strict type checking options
     "strict": true,
+    // Report unused local variables
     "noUnusedLocals": true,
+    // Report unused function parameters
     "noUnusedParameters": true,
+    // Only allow syntax that can be erased without type information
     "erasableSyntaxOnly": true,
+    // Report fallthrough cases in switch statements
     "noFallthroughCasesInSwitch": true,
+    // Report unchecked side effect imports
     "noUncheckedSideEffectImports": true
   },
+  // Include all files in the src directory
   "include": ["src"]
 }

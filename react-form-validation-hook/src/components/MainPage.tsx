@@ -1,31 +1,47 @@
+// React library and hooks for component creation and state management
 import React, { useState } from 'react';
+// Import authentication context for user data and logout functionality
 import { useAuth } from '../contexts/AuthContext';
+// Import component-specific styles
 import './MainPage.css';
 
+/**
+ * MainPage Component
+ * Protected main application page shown after successful authentication
+ * Demonstrates authenticated user interface with WhatsApp integration
+ */
 const MainPage: React.FC = () => {
+  // Get current user data and logout function from auth context
   const { user, logout } = useAuth();
+  // State for WhatsApp message input
   const [message, setMessage] = useState('');
+  // State for message validation error
   const [messageError, setMessageError] = useState('');
 
+  /**
+   * Handles sending message via WhatsApp
+   * Validates input and opens WhatsApp with pre-filled message
+   */
   const handleWhatsAppSend = () => {
-    // Validate message
+    // Validate that message is not empty
     if (!message.trim()) {
       setMessageError('Please enter a message before sending.');
       return;
     }
 
+    // Clear any previous error
     setMessageError('');
 
-    // Encode the message for URL
+    // Encode the message for safe URL transmission
     const encodedMessage = encodeURIComponent(message.trim());
 
-    // Construct WhatsApp URL
+    // Construct WhatsApp URL with phone number and message
     const whatsappUrl = `https://wa.me/2349025794407?text=${encodedMessage}`;
 
-    // Open WhatsApp in new tab
+    // Open WhatsApp in new tab/window
     window.open(whatsappUrl, '_blank');
 
-    // Clear the message after sending
+    // Clear the message input after sending
     setMessage('');
   };
 

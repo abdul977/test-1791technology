@@ -1,7 +1,12 @@
 {
+  // Root TypeScript configuration using project references
+  // No files are compiled directly by this config
   "files": [],
+  // Project references for modular TypeScript compilation
   "references": [
+    // Application code configuration
     { "path": "./tsconfig.app.json" },
+    // Node.js/build tools configuration
     { "path": "./tsconfig.node.json" }
   ]
 }

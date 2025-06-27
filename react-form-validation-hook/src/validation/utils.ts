@@ -1,48 +1,61 @@
+// Import types for validation rules
 import { ValidationRule, ValidationRules } from '../hooks/types';
 
 /**
  * Utility functions for working with validation rules
+ * Provides helper functions for combining, creating, and managing validation logic
  */
 
 /**
  * Combines multiple validation rules into a single rule
- * The first error encountered will be returned
+ * Executes rules in order and returns the first error encountered
+ * Useful for creating complex validation scenarios from simple rules
+ * @param rules - Array of validation rules to combine
+ * @returns Single ValidationRule that executes all provided rules
  */
 export const combineRules = (...rules: ValidationRule[]): ValidationRule => {
   return {
+    // Create a custom validation function that runs all rules
     custom: async (value: any) => {
+      // Iterate through each rule in order
       for (const rule of rules) {
-        // Check required
+        // Check required validation first (highest priority)
         if (rule.required && (!value || (typeof value === 'string' && value.trim() === ''))) {
           return rule.message || 'This field is required';
         }
 
         // Skip other validations if field is empty and not required
+        // This allows optional fields to pass validation when empty
         if (!value || (typeof value === 'string' && value.trim() === '')) {
           continue;
         }
 
-        // Check string validations
+        // Check string-specific validations
         if (typeof value === 'string') {
+          // Minimum length validation
           if (rule.minLength && value.length < rule.minLength) {
             return rule.message || `Must be at least ${rule.minLength} characters`;
           }
+          // Maximum length validation
           if (rule.maxLength && value.length > rule.maxLength) {
             return rule.message || `Must be no more than ${rule.maxLength} characters`;
           }
+          // Pattern/regex validation
           if (rule.pattern && !rule.pattern.test(value)) {
             return rule.message || 'Invalid format';
           }
         }
 
-        // Check custom validation
+        // Check custom validation function
         if (rule.custom) {
           const customResult = await rule.custom(value);
+          // Return first error encountered
           if (customResult) {
             return customResult;
           }
         }
       }
+      // All rules passed
       return null;
     },
   };
@@ -50,60 +63,85 @@ export const combineRules = (...rules: ValidationRule[]): ValidationRule => {
 
 /**
  * Creates a conditional validation rule that only applies when a condition is met
+ * Useful for dependent field validation (e.g., require field B only if field A has a specific value)
+ * @param condition - Function that determines if validation should be applied
+ * @param rule - Validation rule to apply when condition is true
+ * @param getValues - Function to get current form values for condition evaluation
+ * @returns ValidationRule that conditionally applies validation
  */
 export const when = (
   condition: (values: any) => boolean,
   rule: ValidationRule,
   getValues: () => any
 ): ValidationRule => ({
+  // Create custom validation function that checks condition first
   custom: async (value: any) => {
+    // Get current form values to evaluate condition
     const values = getValues();
+    // Skip validation if condition is not met
     if (!condition(values)) {
-      return null; // Skip validation if condition is not met
+      return null; // Field is considered valid when condition is false
     }
 
-    // Apply the rule
+    // Apply the validation rule since condition is met
+    // Check required validation first
     if (rule.required && (!value || (typeof value === 'string' && value.trim() === ''))) {
       return rule.message || 'This field is required';
     }
 
+    // Skip other validations if field is empty and not required
     if (!value || (typeof value === 'string' && value.trim() === '')) {
       return null;
     }
 
+    // Apply string-specific validations
     if (typeof value === 'string') {
+      // Minimum length validation
       if (rule.minLength && value.length < rule.minLength) {
         return rule.message || `Must be at least ${rule.minLength} characters`;
       }
+      // Maximum length validation
       if (rule.maxLength && value.length > rule.maxLength) {
         return rule.message || `Must be no more than ${rule.maxLength} characters`;
       }
+      // Pattern validation
       if (rule.pattern && !rule.pattern.test(value)) {
         return rule.message || 'Invalid format';
       }
     }
 
+    // Apply custom validation if present
     if (rule.custom) {
       return await rule.custom(value);
     }
 
+    // All validations passed
     return null;
   },
 });
 
 /**
  * Creates validation rules for common form patterns
+ * Provides pre-configured validation rule sets for typical form scenarios
+ * Reduces boilerplate and ensures consistency across forms
  */
 export const createFormRules = {
   /**
    * Login form validation rules
+   * Standard email and password validation for authentication forms
+   * @returns ValidationRules object with email and password validation
    */
   login: (): ValidationRules => ({
+    // Email field validation
     email: {
+      // Email is required for login
       required: true,
+      // Basic email format validation
       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      // User-friendly error message
       message: 'Please enter a valid email address',
     },
+    // Password field validation
     password: {
       required: true,
       minLength: 6,

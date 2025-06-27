@@ -1,4 +1,16 @@
+/**
+ * Test suite for validation utility functions
+ * Comprehensive tests for utility functions including:
+ * - Rule combination and composition
+ * - Conditional validation logic
+ * - Form rule creation helpers
+ * - Debouncing functionality
+ * - Value validation utilities
+ */
+
+// Import Vitest testing utilities
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
+// Import utility functions to test
 import {
   combineRules,
   when,
@@ -6,10 +18,14 @@ import {
   debounce,
   validateValue,
 } from '../utils';
+// Import types for type safety in tests
 import type { ValidationRule } from '../../hooks/types';
 
+// Main test suite for validation utilities
 describe('Validation Utils', () => {
+  // Test suite for combineRules function
   describe('combineRules', () => {
+    // Test that multiple rules can be combined into one
     it('should combine multiple validation rules', async () => {
       const rule1: ValidationRule = {
         required: true,

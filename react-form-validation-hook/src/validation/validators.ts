@@ -1,49 +1,82 @@
+// Import ValidationRule type for type safety
 import { ValidationRule } from '../hooks/types';
 
 /**
- * Validator factory functions for creating custom validation rules
+ * Validator factory functions for creating reusable validation rules
+ * These functions return ValidationRule objects that can be used with the form validation hook
+ * Each validator can accept custom error messages for better user experience
  */
 
 /**
  * Creates a required field validator
+ * Ensures that the field has a non-empty value
+ * @param message - Custom error message (optional)
+ * @returns ValidationRule object with required constraint
  */
 export const required = (message?: string): ValidationRule => ({
+  // Mark field as required
   required: true,
+  // Use custom message or default
   message: message || 'This field is required',
 });
 
 /**
- * Creates a minimum length validator
+ * Creates a minimum length validator for string inputs
+ * Validates that string values meet minimum character requirements
+ * @param min - Minimum number of characters required
+ * @param message - Custom error message (optional)
+ * @returns ValidationRule object with minLength constraint
  */
 export const minLength = (min: number, message?: string): ValidationRule => ({
+  // Set minimum length requirement
   minLength: min,
+  // Use custom message or generate default with min value
   message: message || `Must be at least ${min} characters`,
 });
 
 /**
- * Creates a maximum length validator
+ * Creates a maximum length validator for string inputs
+ * Validates that string values don't exceed maximum character limits
+ * @param max - Maximum number of characters allowed
+ * @param message - Custom error message (optional)
+ * @returns ValidationRule object with maxLength constraint
  */
 export const maxLength = (max: number, message?: string): ValidationRule => ({
+  // Set maximum length limit
   maxLength: max,
+  // Use custom message or generate default with max value
   message: message || `Must be no more than ${max} characters`,
 });
 
 /**
- * Creates a pattern validator
+ * Creates a pattern validator using regular expressions
+ * Validates that string values match a specific pattern/format
+ * @param regex - Regular expression pattern to match against
+ * @param message - Custom error message (optional)
+ * @returns ValidationRule object with pattern constraint
  */
 export const pattern = (regex: RegExp, message?: string): ValidationRule => ({
+  // Set regex pattern for validation
   pattern: regex,
+  // Use custom message or default
   message: message || 'Invalid format',
 });
 
 /**
- * Creates a custom validator
+ * Creates a custom validator with user-defined validation logic
+ * Allows for complex validation scenarios including async validation
+ * @param validator - Function that takes a value and returns error message or null
+ * @param message - Fallback error message (optional)
+ * @returns ValidationRule object with custom validation function
  */
 export const custom = (
+  // Validator function can be sync or async
   validator: (value: any) => string | null | Promise<string | null>,
   message?: string
 ): ValidationRule => ({
+  // Set custom validation function
   custom: validator,
+  // Use custom message or default (though custom validator should return its own message)
   message: message || 'Invalid value',
 });
 

@@ -1,4 +1,15 @@
+/**
+ * Test suite for validation validator factory functions
+ * Comprehensive tests for all validator creators including:
+ * - Basic validators (required, length, pattern)
+ * - Numeric validators (min, max, range)
+ * - Format validators (email, url, phone, date)
+ * - Advanced validators (confirmation, unique, file validation)
+ */
+
+// Import Vitest testing utilities
 import { describe, it, expect, vi } from 'vitest';
+// Import all validator factory functions to test
 import {
   required,
   minLength,
@@ -20,12 +31,17 @@ import {
   fileType,
 } from '../validators';
 
+// Main test suite for validation validators
 describe('Validation Validators', () => {
+  // Test suite for required validator
   describe('required', () => {
+    // Test that required validator creates correct rule structure
     it('should create a required validation rule', () => {
       const rule = required('This field is required');
-      
+
+      // Verify required flag is set
       expect(rule.required).toBe(true);
+      // Verify custom message is used
       expect(rule.message).toBe('This field is required');
     });
 

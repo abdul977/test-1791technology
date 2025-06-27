@@ -1,35 +1,63 @@
-/* App Layout */
+/*
+ * App.css - Main application styles
+ * Comprehensive styling for the React Form Validation Hook demo application
+ * Includes responsive design, form styling, and interactive components
+ */
+
+/* App Layout - Main container and structure */
 .app {
+  /* Full viewport height for proper layout */
   min-height: 100vh;
+  /* Full width container */
   width: 100%;
+  /* Flexbox layout for header, content, footer structure */
   display: flex;
   flex-direction: column;
+  /* Beautiful gradient background for visual appeal */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Include padding and border in element's total width and height */
   box-sizing: border-box;
 }
 
+/* App header - Title and description section */
 .app-header {
+  /* Center-aligned text for header content */
   text-align: center;
+  /* Generous padding for breathing room */
   padding: 2rem;
+  /* White text for contrast against gradient background */
   color: white;
 }
 
+/* Main heading styles */
 .app-header h1 {
+  /* Remove default margins and add bottom spacing */
   margin: 0 0 0.5rem 0;
+  /* Large, prominent font size */
   font-size: 2.5rem;
+  /* Bold font weight for emphasis */
   font-weight: 700;
 }
 
+/* Header paragraph text */
 .app-header p {
+  /* Remove default margins */
   margin: 0;
+  /* Slightly larger than body text */
   font-size: 1.1rem;
+  /* Slightly transparent for hierarchy */
   opacity: 0.9;
 }
 
+/* Authentication note styling */
 .app-header .auth-note {
+  /* Top margin for separation */
   margin-top: 0.5rem;
+  /* Standard font size */
   font-size: 1rem;
+  /* More transparent for less emphasis */
   opacity: 0.8;
+  /* Italic style to indicate supplementary information */
   font-style: italic;
 }
 
@@ -279,14 +307,16 @@
   font-size: 0.9rem;
 }
 
-/* Responsive Design */
+/* Responsive Design - Mobile-first approach with progressive enhancement */
 
-/* Tablet styles */
+/* Tablet styles - Medium screens (768px to 1024px) */
 @media (max-width: 1024px) {
+  /* Reduce content padding for better space utilization */
   .demo-content {
     padding: 1.5rem;
   }
 
+  /* Increase form width to utilize available space better */
   .login-form,
   .registration-form,
   .contact-form,

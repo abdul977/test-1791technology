@@ -1,57 +1,100 @@
+/*
+ * Global CSS styles for React Form Validation Hook Demo
+ * Provides base styling and design system for the application
+ */
+
+/* Root element styles - defines global design tokens */
 :root {
+  /* Font stack prioritizing system fonts for better performance and native feel */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Comfortable line height for readability */
   line-height: 1.5;
+  /* Normal font weight as default */
   font-weight: 400;
 
+  /* Disable font synthesis for better performance */
   font-synthesis: none;
+  /* Optimize text rendering for legibility */
   text-rendering: optimizeLegibility;
+  /* Enable font smoothing on WebKit browsers */
   -webkit-font-smoothing: antialiased;
+  /* Enable font smoothing on Firefox for macOS */
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Link styles with interactive states */
 a {
+  /* Medium font weight for emphasis */
   font-weight: 500;
+  /* Primary brand color for links */
   color: #646cff;
+  /* Inherit text decoration from parent */
   text-decoration: inherit;
 }
+/* Link hover state for better user feedback */
 a:hover {
+  /* Darker shade on hover for visual feedback */
   color: #535bf2;
 }
 
+/* Body element - main container styles */
 body {
+  /* Remove default margin for full control */
   margin: 0;
+  /* Minimum width to prevent layout breaking on very small screens */
   min-width: 320px;
+  /* Full viewport height for proper layout */
   min-height: 100vh;
 }
 
+/* Main heading styles */
 h1 {
+  /* Large font size for visual hierarchy */
   font-size: 3.2em;
+  /* Tighter line height for headings */
   line-height: 1.1;
 }
 
+/* Button component styles with interactive states */
 button {
+  /* Rounded corners for modern appearance */
   border-radius: 8px;
+  /* Transparent border for consistent sizing */
   border: 1px solid transparent;
+  /* Comfortable padding for touch targets */
   padding: 0.6em 1.2em;
+  /* Inherit font size from parent */
   font-size: 1em;
+  /* Medium font weight for emphasis */
   font-weight: 500;
+  /* Inherit font family for consistency */
   font-family: inherit;
+  /* Dark background for dark theme */
   background-color: #1a1a1a;
+  /* Pointer cursor to indicate interactivity */
   cursor: pointer;
+  /* Smooth transition for hover effects */
   transition: border-color 0.25s;
 }
+/* Button hover state */
 button:hover {
+  /* Brand color border on hover */
   border-color: #646cff;
 }
+/* Button focus states for accessibility */
 button:focus,
 button:focus-visible {
+  /* High contrast focus outline for keyboard navigation */
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Light theme styles using CSS media query */
 @media (prefers-color-scheme: light) {
+  /* Adjust link hover color for light theme */
   a:hover {
     color: #747bff;
   }
+  /* Light background for buttons in light theme */
   button {
     background-color: #f9f9f9;
   }

@@ -1,29 +1,61 @@
+// React library for component creation
 import React from 'react';
+// Import form validation hook for comprehensive form state management
 import { useFormValidation } from '../hooks';
+// Import predefined validation rules for registration forms
 import { createFormRules } from '../validation';
 
+/**
+ * Interface defining the structure of registration form data
+ * Used for type safety and form validation
+ */
 interface RegistrationFormData {
+  // User's first name
   firstName: string;
+  // User's last name
   lastName: string;
+  // User's email address (must be unique and valid)
   email: string;
+  // User's chosen password (must meet security requirements)
   password: string;
+  // Password confirmation (must match password field)
   confirmPassword: string;
 }
 
+/**
+ * Props interface for RegistrationForm component
+ * Defines expected properties and their types
+ */
 interface RegistrationFormProps {
+  // Callback function called when form is successfully submitted
   onSubmit: (values: RegistrationFormData) => void;
+  // Optional loading state to disable form during external operations
   isLoading?: boolean;
 }
 
+/**
+ * RegistrationForm Component
+ * A comprehensive registration form with multiple fields and validation
+ * Demonstrates advanced form validation including password confirmation
+ */
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, isLoading = false }) => {
+  // Initialize form validation hook with comprehensive configuration
   const {
+    // Current form field values
     values,
+    // Current validation errors for each field
     errors,
+    // Track which fields have been interacted with
     touched,
+    // Whether form is currently being submitted
     isSubmitting,
+    // Handler for input change events
     handleChange,
+    // Handler for input blur events (when field loses focus)
     handleBlur,
+    // Handler for form submission with validation
     handleSubmit,
+    // Function to manually set field errors (used for password confirmation)
     setFieldError,
   } = useFormValidation({
     initialValues: {

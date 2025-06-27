@@ -1,31 +1,55 @@
+// React library and hooks for component creation and state management
 import React, { useState } from 'react';
+// React Router hook for programmatic navigation
 import { useNavigate } from 'react-router-dom';
+// Import all form components for demonstration
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import ContactForm from './ContactForm';
 import AsyncValidationForm from './AsyncValidationForm';
+// Import authentication context for user login
 import { useAuth } from '../contexts/AuthContext';
 
+// Type definition for different demo form types
 type DemoType = 'login' | 'registration' | 'contact' | 'async';
 
+/**
+ * LoginPage Component
+ * Main demo page that showcases all form validation examples
+ * Provides navigation between different form types and handles authentication
+ */
 const LoginPage: React.FC = () => {
+  // State to track which demo form is currently active
   const [activeDemo, setActiveDemo] = useState<DemoType>('login');
+  // State to manage notification messages for user feedback
   const [notifications, setNotifications] = useState<string[]>([]);
+  // Get login function from authentication context
   const { login } = useAuth();
+  // Get navigation function for routing
   const navigate = useNavigate();
 
+  /**
+   * Adds a notification message that auto-disappears after 3 seconds
+   * Provides user feedback for form submissions
+   */
   const addNotification = (message: string) => {
+    // Add new notification to the list
     setNotifications(prev => [...prev, message]);
+    // Remove notification after 3 seconds
     setTimeout(() => {
       setNotifications(prev => prev.slice(1));
     }, 3000);
   };
 
-  // Generic authentication handler for all forms
+  /**
+   * Generic authentication handler for all forms
+   * Simulates user authentication and navigation to main app
+   */
   const authenticateUser = async (email: string, formType: string) => {
     try {
-      // For forms without email, use a default email
+      // For forms without email, use a default email for demo purposes
       const userEmail = email || 'demo@example.com';
+      // Attempt to authenticate user with demo credentials
       const success = await login(userEmail, 'password123');
       if (success) {
         addNotification(`${formType} successful! Redirecting...`);

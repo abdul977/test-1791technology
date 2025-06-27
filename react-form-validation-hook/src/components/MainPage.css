@@ -1,30 +1,55 @@
-/* Main Page Styles */
+/*
+ * MainPage.css - Styles for the authenticated main application page
+ * Provides layout and styling for the post-login user interface
+ */
+
+/* Main page container - full viewport layout */
 .main-page {
+  /* Full viewport height for proper layout */
   min-height: 100vh;
+  /* Consistent gradient background with login page */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Dark text color for content areas */
   color: #333;
 }
 
+/* Header section with glassmorphism effect */
 .main-header {
+  /* Semi-transparent background for glassmorphism */
   background: rgba(255, 255, 255, 0.1);
+  /* Blur effect for modern glass appearance */
   backdrop-filter: blur(10px);
+  /* Comfortable padding for header content */
   padding: 1rem 0;
+  /* Subtle border for visual separation */
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Header content container with max width and centering */
 .header-content {
+  /* Maximum width for large screens */
   max-width: 1200px;
+  /* Center the content horizontally */
   margin: 0 auto;
+  /* Horizontal padding for breathing room */
   padding: 0 2rem;
+  /* Flexbox layout for header elements */
   display: flex;
+  /* Space between title and user info */
   justify-content: space-between;
+  /* Vertically center align items */
   align-items: center;
 }
 
+/* Main header title styling */
 .main-header h1 {
+  /* White text for contrast against gradient */
   color: white;
+  /* Remove default margins */
   margin: 0;
+  /* Appropriate size for main heading */
   font-size: 1.8rem;
+  /* Bold font weight for emphasis */
   font-weight: 700;
 }
 

@@ -1,20 +1,38 @@
+/**
+ * Test suite for useFormValidation hook
+ * Comprehensive tests covering all hook functionality including:
+ * - Form state management
+ * - Validation logic (sync and async)
+ * - Event handlers
+ * - Edge cases and error scenarios
+ */
+
+// Import React Testing Library utilities for hook testing
 import { renderHook, act } from '@testing-library/react';
+// Import Vitest testing utilities
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+// Import the hook under test
 import useFormValidation from '../useFormValidation';
+// Import types for type safety in tests
 import { ValidationRules } from '../types';
 
+// Main test suite for the form validation hook
 describe('useFormValidation', () => {
+  // Mock validation rules for testing different validation scenarios
   const mockValidationRules: ValidationRules = {
+    // Email field with required and pattern validation
     email: {
       required: true,
       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       message: 'Please enter a valid email address',
     },
+    // Password field with required and minimum length validation
     password: {
       required: true,
       minLength: 8,
       message: 'Password must be at least 8 characters',
     },
+    // Username field with multiple validation constraints
     username: {
       required: true,
       minLength: 3,
@@ -24,8 +42,11 @@ describe('useFormValidation', () => {
     },
   };
 
+  // Setup before each test
   beforeEach(() => {
+    // Clear any existing timers to prevent test interference
     vi.clearAllTimers();
+    // Use fake timers for testing debounced functionality
     vi.useFakeTimers();
   });
 

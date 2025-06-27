@@ -1,32 +1,62 @@
+// React library for component creation
 import React from 'react';
+// Import form validation hook for advanced form state management
 import { useFormValidation } from '../hooks';
+// Import individual validator functions for custom validation rules
 import { required, email, minLength } from '../validation';
 
+/**
+ * Interface defining the structure of async validation form data
+ * Used for type safety and form validation with server-side checks
+ */
 interface AsyncValidationFormData {
+  // Username (must be unique - checked against server)
   username: string;
+  // Email address (must be unique - checked against server)
   email: string;
+  // Password (local validation only)
   password: string;
 }
 
+/**
+ * Props interface for AsyncValidationForm component
+ * Includes async validation functions for server-side checks
+ */
 interface AsyncValidationFormProps {
+  // Callback function called when form is successfully submitted
   onSubmit: (values: AsyncValidationFormData) => void;
+  // Async function to check if username is available on server
   checkUsernameAvailability: (username: string) => Promise<boolean>;
+  // Async function to check if email is available on server
   checkEmailAvailability: (email: string) => Promise<boolean>;
+  // Optional loading state to disable form during external operations
   isLoading?: boolean;
 }
 
+/**
+ * AsyncValidationForm Component
+ * Demonstrates advanced async validation with server-side uniqueness checks
+ * Shows how to integrate real-time validation with external APIs
+ */
 const AsyncValidationForm: React.FC<AsyncValidationFormProps> = ({
   onSubmit,
   checkUsernameAvailability,
   checkEmailAvailability,
   isLoading = false,
 }) => {
+  // Initialize form validation hook with async validation configuration
   const {
+    // Current form field values
     values,
+    // Current validation errors for each field
     errors,
+    // Track which fields have been interacted with
     touched,
+    // Whether form is currently being submitted
     isSubmitting,
+    // Whether form is currently valid (no errors)
     isValid,
+    // Handler for input change events
     handleChange,
     handleBlur,
     handleSubmit,

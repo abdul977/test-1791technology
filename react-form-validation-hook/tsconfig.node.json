@@ -1,25 +1,43 @@
 {
+  // TypeScript configuration for Node.js build tools (Vite config, etc.)
   "compilerOptions": {
+    // Build info file location for incremental compilation
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    // Target ES2023 for Node.js environment
     "target": "ES2023",
+    // Include ES2023 type library for Node.js features
     "lib": ["ES2023"],
+    // Use ESNext module system
     "module": "ESNext",
+    // Skip type checking of declaration files for faster compilation
     "skipLibCheck": true,
 
-    /* Bundler mode */
+    /* Bundler mode - optimized for build tools */
+    // Use bundler-specific module resolution
     "moduleResolution": "bundler",
+    // Allow importing TypeScript files with extensions
     "allowImportingTsExtensions": true,
+    // Require exact module syntax for build tools
     "verbatimModuleSyntax": true,
+    // Force module detection for all files
     "moduleDetection": "force",
+    // Don't emit JavaScript files
     "noEmit": true,
 
-    /* Linting */
+    /* Linting - strict type checking options */
+    // Enable all strict type checking options
     "strict": true,
+    // Report unused local variables
     "noUnusedLocals": true,
+    // Report unused function parameters
     "noUnusedParameters": true,
+    // Only allow syntax that can be erased without type information
     "erasableSyntaxOnly": true,
+    // Report fallthrough cases in switch statements
     "noFallthroughCasesInSwitch": true,
+    // Report unchecked side effect imports
     "noUncheckedSideEffectImports": true
   },
+  // Include Vite configuration file
   "include": ["vite.config.ts"]
 }

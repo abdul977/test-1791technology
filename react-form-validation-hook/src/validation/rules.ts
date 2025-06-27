@@ -1,35 +1,67 @@
+// Import ValidationRule type for type safety
 import { ValidationRule } from '../hooks/types';
 
 /**
  * Predefined validation rules for common use cases
+ * These rules can be used directly or as templates for custom validation
+ * Each rule combines multiple validation constraints for comprehensive validation
  */
 
-// Email validation rule
+/**
+ * Email validation rule
+ * Validates email format using RFC-compliant regex pattern
+ * Requires field to be filled and match email pattern
+ */
 export const emailRule: ValidationRule = {
+  // Email field is required
   required: true,
+  // Basic email pattern: localpart@domain.tld
   pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  // User-friendly error message
   message: 'Please enter a valid email address',
 };
 
-// Password validation rule (minimum 8 characters, at least one letter and one number)
+/**
+ * Basic password validation rule
+ * Minimum 8 characters with at least one letter and one number
+ * Suitable for most applications with moderate security requirements
+ */
 export const passwordRule: ValidationRule = {
+  // Password field is required
   required: true,
+  // Minimum length for security
   minLength: 8,
+  // Pattern: at least one letter and one number, allows special characters
   pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]/,
+  // Clear requirements in error message
   message: 'Password must be at least 8 characters with at least one letter and one number',
 };
 
-// Strong password rule (minimum 8 characters, uppercase, lowercase, number, special character)
+/**
+ * Strong password validation rule
+ * Requires uppercase, lowercase, number, and special character
+ * Suitable for high-security applications
+ */
 export const strongPasswordRule: ValidationRule = {
+  // Strong password field is required
   required: true,
+  // Minimum length for security
   minLength: 8,
+  // Pattern: lowercase, uppercase, digit, and special character
   pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
+  // Detailed requirements in error message
   message: 'Password must contain at least 8 characters with uppercase, lowercase, number, and special character',
 };
 
-// Phone number validation rule (US format)
+/**
+ * US phone number validation rule
+ * Supports various US phone number formats
+ * Optional field (not required by default)
+ */
 export const phoneRule: ValidationRule = {
+  // Pattern supports: (123) 456-7890, 123-456-7890, 123 456 7890, +1 123 456 7890
   pattern: /^(\+1\s?)?(\([0-9]{3}\)|[0-9]{3})[\s\-]?[0-9]{3}[\s\-]?[0-9]{4}$/,
+  // User-friendly error message
   message: 'Please enter a valid phone number',
 };
 

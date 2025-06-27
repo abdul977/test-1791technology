@@ -1,29 +1,61 @@
+// React library for component creation
 import React from 'react';
+// Import form validation hook for form state management
 import { useFormValidation } from '../hooks';
+// Import predefined validation rules for contact forms
 import { createFormRules } from '../validation';
 
+/**
+ * Interface defining the structure of contact form data
+ * Used for type safety and form validation
+ */
 interface ContactFormData {
+  // Contact person's name
   name: string;
+  // Contact person's email address
   email: string;
+  // Subject line for the message
   subject: string;
+  // Main message content
   message: string;
 }
 
+/**
+ * Props interface for ContactForm component
+ * Defines expected properties and their types
+ */
 interface ContactFormProps {
+  // Callback function called when form is successfully submitted
   onSubmit: (values: ContactFormData) => void;
+  // Optional loading state to disable form during external operations
   isLoading?: boolean;
 }
 
+/**
+ * ContactForm Component
+ * A contact form with name, email, subject, and message fields
+ * Demonstrates form validation with textarea and character counting
+ */
 const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading = false }) => {
+  // Initialize form validation hook with contact form configuration
   const {
+    // Current form field values
     values,
+    // Current validation errors for each field
     errors,
+    // Track which fields have been interacted with
     touched,
+    // Whether form is currently being submitted
     isSubmitting,
+    // Whether form is currently valid (no errors)
     isValid,
+    // Handler for input change events
     handleChange,
+    // Handler for input blur events (when field loses focus)
     handleBlur,
+    // Handler for form submission with validation
     handleSubmit,
+    // Function to reset form to initial state
     resetForm,
   } = useFormValidation({
     initialValues: {
