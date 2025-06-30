@@ -8,6 +8,7 @@ import react from '@vitejs/plugin-react'
 
 // Vite configuration - see https://vite.dev/config/
 export default defineConfig({
+  base: '/',
   // Plugins to enhance Vite functionality
   plugins: [
     // React plugin enables JSX transformation and Fast Refresh
