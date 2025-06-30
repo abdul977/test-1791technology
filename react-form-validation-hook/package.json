@@ -1,77 +1,41 @@
 {
-  // Package name for the React form validation hook library
   "name": "react-form-validation-hook",
-  // Private package - not intended for npm publication
   "private": true,
-  // Initial development version
   "version": "0.0.0",
-  // Use ES modules for modern JavaScript support
   "type": "module",
-  // Development and build scripts
   "scripts": {
-    // Start development server with hot reload
     "dev": "vite",
-    // Build for production: compile TypeScript then bundle with Vite
     "build": "tsc -b && vite build",
-    // Run ESLint for code quality and style checking
     "lint": "eslint .",
-    // Preview production build locally
     "preview": "vite preview",
-    // Run unit tests with Vitest
     "test": "vitest",
-    // Run tests with interactive UI
     "test:ui": "vitest --ui",
-    // Run tests with coverage reporting
     "test:coverage": "vitest --coverage"
   },
-  // Runtime dependencies required for the application
   "dependencies": {
-    // React 19 - latest version with improved hooks and concurrent features
     "react": "^19.1.0",
-    // React DOM for rendering React components to the DOM
     "react-dom": "^19.1.0",
-    // React Router for client-side routing and navigation
     "react-router-dom": "^7.6.2"
   },
-  // Development dependencies for building, testing, and linting
   "devDependencies": {
-    // ESLint core JavaScript configuration
     "@eslint/js": "^9.29.0",
-    // Jest DOM matchers for testing library assertions
     "@testing-library/jest-dom": "^6.6.3",
-    // React Testing Library for component testing
     "@testing-library/react": "^16.3.0",
-    // User event simulation for testing user interactions
     "@testing-library/user-event": "^14.6.1",
-    // TypeScript type definitions for Node.js
     "@types/node": "^24.0.4",
-    // TypeScript type definitions for React
     "@types/react": "^19.1.8",
-    // TypeScript type definitions for React DOM
     "@types/react-dom": "^19.1.6",
-    // TypeScript type definitions for React Router DOM
     "@types/react-router-dom": "^5.3.3",
-    // Vite plugin for React support with Fast Refresh
     "@vitejs/plugin-react": "^4.5.2",
-    // Vitest coverage provider using V8 engine
     "@vitest/coverage-v8": "^3.2.4",
-    // ESLint for code linting and style enforcement
     "eslint": "^9.29.0",
-    // ESLint plugin for React Hooks rules
     "eslint-plugin-react-hooks": "^5.2.0",
-    // ESLint plugin for React Fast Refresh compatibility
     "eslint-plugin-react-refresh": "^0.4.20",
-    // Global variables definitions for different environments
     "globals": "^16.2.0",
-    // DOM implementation for testing in Node.js environment
     "jsdom": "^26.1.0",
-    // TypeScript compiler for type checking and compilation
     "typescript": "~5.8.3",
-    // TypeScript ESLint integration for TypeScript-specific linting
     "typescript-eslint": "^8.34.1",
-    // Vite build tool for fast development and optimized builds
     "vite": "^7.0.0",
-    // Vitest testing framework with Vite integration
     "vitest": "^3.2.4"
   }
 }
